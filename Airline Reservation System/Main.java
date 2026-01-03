@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Main {
-    void main() {
+    public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
 
@@ -14,7 +14,10 @@ public class Main {
         System.out.print("Enter email: ");
         String email = sc.nextLine();
 
-        Passenger passenger = new Passenger(name, passport, email);
+        Person passenger = new Passenger(name, passport, email);
+        passenger.showRole(); // ← полиморфизм
+
+        Reservation reservation = new Reservation();
 
         System.out.print("Enter flight number: ");
         String flightNumber = sc.nextLine();
@@ -24,17 +27,19 @@ public class Main {
 
         System.out.print("Enter seats: ");
         int seats = sc.nextInt();
+        sc.nextLine();
 
-        Flight flight = new Flight(flightNumber, destination, seats);
+        Flight flight1 = new Flight(flightNumber, destination, seats);
+        Flight flight2 = new Flight("TEST123", "Paris", 50);
 
-        Reservation reservation = new Reservation(passenger, flight);
+        reservation.addFlight(flight1);
+        reservation.addFlight(flight2);
 
-        System.out.println();
-        reservation.getInfo();
+        reservation.userSearch();
 
-        Flight anotherFlight = new Flight("TEST123", destination, 50);
-        System.out.println();
-        System.out.println("Same destination: " +
-                flight.getDestination().equals(anotherFlight.getDestination()));
+
+        System.out.println("\nFlights sorted by seats:");
+        reservation.sortBySeats();
+        reservation.showAllFlights();
     }
 }
