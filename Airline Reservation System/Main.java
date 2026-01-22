@@ -15,7 +15,7 @@ public class Main {
         String email = sc.nextLine();
 
         Person passenger = new Passenger(name, passport, email);
-        passenger.showRole(); // ← полиморфизм
+        passenger.showRole();
 
         Reservation reservation = new Reservation();
 
@@ -32,11 +32,18 @@ public class Main {
         Flight flight1 = new Flight(flightNumber, destination, seats);
         Flight flight2 = new Flight("TEST123", "Paris", 50);
 
+        FlightDAO flightDAO = new FlightDAO();
+        flightDAO.saveFlight(flight1);
+
+        System.out.println("\nFlights from DB:");
+        for (Flight f : flightDAO.getAllFlights()) {
+            System.out.println(f);
+        }
+
         reservation.addFlight(flight1);
         reservation.addFlight(flight2);
 
         reservation.userSearch();
-
 
         System.out.println("\nFlights sorted by seats:");
         reservation.sortBySeats();

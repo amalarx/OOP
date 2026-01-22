@@ -14,9 +14,9 @@ public class Flight {
     public int getSeats(){return seats;}
 
     public void getInfo() {
-            System.out.println("Flight: " + flightNumber +
-                    ", Destination: " + destination +
-                    ", Seats: " + seats);
+        System.out.println("Flight: " + flightNumber +
+                ", Destination: " + destination +
+                ", Seats: " + seats);
     }
     @Override
     public String toString() {
